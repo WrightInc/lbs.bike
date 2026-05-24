@@ -405,6 +405,36 @@ body.demo-active .locale-count {
   .demo-tag { display: block; margin: 8px 0 0 0; width: fit-content; }
 }
 
+/* ── STICKY MOBILE CTA ── */
+#sticky-cta {
+  display: none;
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 150;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 16px 24px;
+  background: #c8a84b;
+  color: #090909;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.4);
+  cursor: pointer;
+  transition: opacity .25s ease, transform .25s ease, background .18s;
+}
+#sticky-cta:hover { background: #d8b95b; }
+#sticky-cta:active { transform: translateY(1px); }
+#sticky-cta.hide { opacity: 0; transform: translateY(120%); pointer-events: none; }
+@media (max-width: 768px) {
+  #sticky-cta { display: block; }
+}
+
 /* ── MOBILE ── */
 @media (max-width: 768px) {
   #nav { padding: 0 18px; }
@@ -681,6 +711,9 @@ body.demo-active .locale-count {
   </div>
 </section>
 
+<!-- STICKY MOBILE CTA -->
+<button id="sticky-cta" type="button" aria-label="Send your input — scroll to contact form">Send Input</button>
+
 <!-- FOOTER -->
 <footer>
   <div class="fgrid">
@@ -806,6 +839,21 @@ function submitContact(e) {
   document.getElementById('contact-success').classList.add('show');
   return false;
 }
+
+/* Sticky mobile CTA — smooth-scroll to #contact, auto-hide when contact is in view */
+(function () {
+  const cta = document.getElementById('sticky-cta');
+  const contact = document.getElementById('contact');
+  if (!cta || !contact) return;
+  cta.addEventListener('click', () => {
+    contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  const ctaObs = new IntersectionObserver(
+    es => es.forEach(e => cta.classList.toggle('hide', e.isIntersecting)),
+    { threshold: 0.15 }
+  );
+  ctaObs.observe(contact);
+})();
 
 /* ─────────────────────────────────────────────────────────────
    LOCALIZATION HOOK — wire up when geo-detection is ready.
