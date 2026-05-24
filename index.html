@@ -4,9 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LBS — Local Bike Source</title>
+<meta name="theme-color" content="#090909">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;600;700&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 body { background: #090909; color: #fff; font-family: 'Barlow Condensed', sans-serif; overflow-x: hidden; }
 a { color: inherit; text-decoration: none; }
 
@@ -115,6 +119,7 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase; color: rgba(255,255,255,.6);
   margin-bottom: 14px;
 }
+#hero-eyebrow b { color: #fff; font-weight: 700; }
 #hero-title {
   font-weight: 700;
   font-size: clamp(36px, 6vw, 80px);
@@ -170,7 +175,7 @@ a { color: inherit; text-decoration: none; }
 .av { width: 38px; height: 38px; border-radius: 50%; background: #1a1a1a; border: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11px; color: rgba(255,255,255,.4); flex-shrink: 0; }
 .ft { font-family: 'Barlow', sans-serif; font-weight: 300; font-size: 14px; color: rgba(255,255,255,.5); line-height: 1.4; }
 .ft b { color: #fff; font-weight: 500; }
-.fm { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.22); white-space: nowrap; text-align: right; }
+.fm { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4); white-space: nowrap; text-align: right; }
 .sidebar { display: flex; flex-direction: column; gap: 2px; }
 .sg { background: linear-gradient(155deg,#141210,#0c0b09); border: 1px solid rgba(200,168,75,.18); padding: 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; cursor: pointer; transition: border-color .2s; }
 .sg:hover { border-color: rgba(200,168,75,.38); }
@@ -203,7 +208,7 @@ a { color: inherit; text-decoration: none; }
 .bc-city { font-size: 10px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.28); }
 .bc-name { font-weight: 700; font-size: 17px; letter-spacing: .04em; text-transform: uppercase; }
 .bc-desc { font-family: 'Barlow', sans-serif; font-weight: 300; font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.5; }
-.bc-cta { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.2); margin-top: auto; transition: color .2s; }
+.bc-cta { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-top: auto; transition: color .2s; }
 .bc:hover .bc-cta { color: #fff; }
 
 /* ── POPULAR ── */
@@ -233,7 +238,7 @@ a { color: inherit; text-decoration: none; }
 .tn { font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 3px; }
 .tl { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.3); }
 
-/* ── PROVINCES ── */
+/* ── REGIONS ── */
 .prov-sec { background: #090909; padding: 72px 56px; display: grid; grid-template-columns: 1fr 2fr; gap: 48px; align-items: start; }
 .prov-sec p { font-family: 'Barlow', sans-serif; font-weight: 300; font-size: 15px; line-height: 1.75; color: rgba(255,255,255,.45); margin-bottom: 24px; }
 .provgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
@@ -242,22 +247,163 @@ a { color: inherit; text-decoration: none; }
 .provname { font-weight: 700; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; }
 .provcount { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.28); }
 
-/* ── FOOTER ── */
+/* Primary region cards (Canada + US) */
+.prov-primary { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 24px; }
+.provcard-lg { background: #111; padding: 28px 24px; cursor: pointer; transition: background .2s; display: flex; flex-direction: column; gap: 8px; border-left: 2px solid #c8a84b; }
+.provcard-lg:hover { background: #181818; }
+.provcard-lg .provname { font-size: 20px; letter-spacing: .04em; }
+.provcard-lg .provcount { font-size: 11px; color: rgba(255,255,255,.55); }
+
+/* Global eyebrow above the secondary row */
+.prov-global-label { font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 10px; font-family: 'Barlow Condensed', sans-serif; }
+.provcard-sm { background: #0c0c0c; padding: 12px 14px; cursor: pointer; transition: background .2s; display: flex; flex-direction: column; gap: 2px; }
+.provcard-sm:hover { background: #131313; }
+.provcard-sm .provname { font-size: 11px; color: rgba(255,255,255,.6); font-weight: 600; }
+.provcard-sm .provcount { font-size: 9px; color: rgba(255,255,255,.25); }
+
+/* ── CONTACT ── */
+.contact-sec {
+  background: linear-gradient(155deg, #141210 0%, #0a0908 100%);
+  border-top: 1px solid rgba(200,168,75,.15);
+  border-bottom: 1px solid rgba(200,168,75,.15);
+  padding: 80px 56px;
+}
+.contact-wrap {
+  max-width: 920px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+.contact-left .ey { color: #c8a84b; }
+.contact-left .st { color: #fff; }
+.contact-lead {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(255,255,255,.7);
+  margin-bottom: 20px;
+}
+.contact-meta {
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  line-height: 2;
+}
+.contact-meta a { color: #c8a84b; transition: color .2s; }
+.contact-meta a:hover { color: #fff; }
+
+.contact-form { display: flex; flex-direction: column; gap: 12px; }
+.contact-form label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 4px;
+  display: block;
+}
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+  width: 100%;
+  background: rgba(0,0,0,.4);
+  border: 1px solid rgba(255,255,255,.12);
+  color: #fff;
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  padding: 12px 14px;
+  transition: border-color .2s, background .2s;
+}
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus {
+  outline: none;
+  border-color: rgba(200,168,75,.6);
+  background: rgba(0,0,0,.6);
+}
+.contact-form textarea { min-height: 110px; resize: vertical; font-family: 'Barlow', sans-serif; }
+.contact-form .field { display: flex; flex-direction: column; }
+.contact-form button {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  padding: 15px 30px;
+  border: none;
+  background: #c8a84b;
+  color: #090909;
+  cursor: pointer;
+  transition: background .18s, transform .18s;
+  margin-top: 4px;
+}
+.contact-form button:hover { background: #d8b95b; }
+.contact-form button:active { transform: translateY(1px); }
+.contact-success {
+  display: none;
+  background: rgba(200,168,75,.1);
+  border: 1px solid rgba(200,168,75,.4);
+  padding: 16px 18px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #c8a84b;
+  margin-top: 12px;
+}
+.contact-success.show { display: block; }
 footer { background: #040404; padding: 56px 56px 32px; border-top: 1px solid rgba(255,255,255,.04); }
 .fgrid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.04); margin-bottom: 24px; }
 .fgrid canvas { display: block; margin-bottom: 14px; }
-.ftag { font-family: 'Barlow', sans-serif; font-weight: 300; font-size: 13px; color: rgba(255,255,255,.28); line-height: 1.75; max-width: 240px; margin-bottom: 12px; }
-.fcon { font-size: 11px; letter-spacing: .12em; color: rgba(255,255,255,.2); line-height: 2; }
+.ftag { font-family: 'Barlow', sans-serif; font-weight: 300; font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.75; max-width: 240px; margin-bottom: 12px; }
+.fcon { font-size: 11px; letter-spacing: .12em; color: rgba(255,255,255,.5); line-height: 2; }
+.fcon a { transition: color .2s; }
+.fcon a:hover { color: #fff; }
 .fct { font-weight: 600; font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: #fff; margin-bottom: 14px; }
 .flinks { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-.flinks a { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.28); transition: color .2s; }
+.flinks a { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.55); transition: color .2s; }
 .flinks a:hover { color: #fff; }
 .fbot { display: flex; justify-content: space-between; }
-.fcopy { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.14); }
+.fcopy { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+.fcopy a { color: rgba(255,255,255,.7); transition: color .2s; }
+.fcopy a:hover { color: #fff; }
 
 /* ── REVEAL ── */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s ease, transform .8s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── LOCALE / DEMO ── */
+/* Wraps any text that will be swapped by geo-detection at launch.
+   No visual change by default; .demo-active highlights them for review. */
+.locale-city, .locale-region, .locale-shop, .locale-count { font-style: normal; }
+body.demo-active .locale-city,
+body.demo-active .locale-region,
+body.demo-active .locale-shop,
+body.demo-active .locale-count {
+  background: rgba(200,168,75,.12);
+  outline: 1px dashed rgba(200,168,75,.4);
+  padding: 0 3px;
+}
+
+/* Demo-mode tag near hero eyebrow */
+.demo-tag {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #c8a84b;
+  border: 1px solid rgba(200,168,75,.35);
+  background: rgba(200,168,75,.07);
+  padding: 3px 8px;
+  vertical-align: middle;
+}
+@media (max-width: 768px) {
+  .demo-tag { display: block; margin: 8px 0 0 0; width: fit-content; }
+}
 
 /* ── MOBILE ── */
 @media (max-width: 768px) {
@@ -281,6 +427,9 @@ footer { background: #040404; padding: 56px 56px 32px; border-top: 1px solid rgb
   .pgrid { grid-template-columns: 1fr 1fr; }
   .prov-sec { grid-template-columns: 1fr; padding: 48px 18px; gap: 24px; }
   .provgrid { grid-template-columns: 1fr 1fr; }
+  .prov-primary { grid-template-columns: 1fr; }
+  .contact-sec { padding: 56px 20px; }
+  .contact-wrap { grid-template-columns: 1fr; gap: 32px; }
   .feature-body { padding: 32px 20px; }
   footer { padding: 40px 18px 28px; }
   .fgrid { grid-template-columns: 1fr 1fr; gap: 24px; }
@@ -289,39 +438,50 @@ footer { background: #040404; padding: 56px 56px 32px; border-top: 1px solid rgb
 @media (max-width: 420px) {
   .pgrid, .provgrid, .fgrid { grid-template-columns: 1fr; }
 }
+
+/* Respect users who request less motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .ticker-track { animation: none; }
+  .feature:hover .feature-img img { transform: none; }
+  * { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <header id="nav">
-  <canvas id="nav-canvas"></canvas>
+  <canvas id="nav-canvas" aria-label="LBS.BIKE logo" role="img"></canvas>
   <ul id="nav-links">
     <li><a href="#">Source a Bike</a></li>
     <li><a href="#">Find Builders</a></li>
     <li><a href="#">Source Parts</a></li>
     <li><a href="#">Shops Near Me</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
   <div id="nav-right">
     <a href="#">Advertise</a>
     <a href="#">Sign In</a>
   </div>
-  <button id="burger" onclick="openMenu()">
+  <button id="burger" onclick="openMenu()" aria-label="Open navigation menu" aria-expanded="false" aria-controls="drawer">
     <span></span><span></span><span></span>
   </button>
 </header>
 
 <!-- OVERLAY + DRAWER -->
-<div id="overlay" onclick="closeMenu()"></div>
-<div id="drawer">
-  <button id="drawer-close" onclick="closeMenu()">✕</button>
+<div id="overlay" onclick="closeMenu()" aria-hidden="true"></div>
+<nav id="drawer" aria-label="Mobile navigation" aria-hidden="true">
+  <button id="drawer-close" onclick="closeMenu()" aria-label="Close navigation menu">✕</button>
   <a href="#" onclick="closeMenu()">Source a Bike</a>
   <a href="#" onclick="closeMenu()">Find Builders</a>
   <a href="#" onclick="closeMenu()">Source Parts</a>
   <a href="#" onclick="closeMenu()">Shops Near Me</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
   <a href="#" onclick="closeMenu()">Advertise</a>
   <a href="#" onclick="closeMenu()">Sign In</a>
-</div>
+</nav>
 
 <!-- HERO: photo fills full viewport, brand top-left, copy bottom-left -->
 <section id="hero">
@@ -331,7 +491,7 @@ footer { background: #040404; padding: 56px 56px 32px; border-top: 1px solid rgb
   <div id="hero-overlay"></div>
 
   <div id="brand">
-    <canvas id="brand-canvas"></canvas>
+    <canvas id="brand-canvas" aria-label="LBS.BIKE logo" role="img"></canvas>
     <div id="brand-words">
       <span>Local</span>
       <span>Bike</span>
@@ -340,12 +500,12 @@ footer { background: #040404; padding: 56px 56px 32px; border-top: 1px solid rgb
   </div>
 
   <div id="hero-bottom">
-    <div id="hero-eyebrow">Welcome, Calgary Rider.</div>
-    <h1 id="hero-title">Find Your Custom<br>Bike, Builder or Shop.</h1>
+    <div id="hero-eyebrow">Welcome, <b class="locale-city">Calgary</b> Rider. <span class="demo-tag">Demo · live version detects your city</span></div>
+    <h1 id="hero-title">Find Your Bike,<br>Builder, or Shop.<br>Local.</h1>
     <div id="hero-stats">
       <div class="hstat"><div class="hstat-n">12</div><div class="hstat-l"><b>Custom builders</b><br>near you</div></div>
       <div class="hstat"><div class="hstat-n">340+</div><div class="hstat-l"><b>Bikes in stock</b><br>near you</div></div>
-      <div class="hstat"><div class="hstat-n">24</div><div class="hstat-l"><b>Riders</b><br>sourced this week</div></div>
+      <div class="hstat"><div class="hstat-n">2,100+</div><div class="hstat-l"><b>Shops &amp; builders</b><br>across North America</div></div>
     </div>
     <div class="ctas">
       <a class="btn f" href="#">Source My Bike</a>
@@ -356,8 +516,8 @@ footer { background: #040404; padding: 56px 56px 32px; border-top: 1px solid rgb
 
 <!-- TICKER -->
 <div class="ticker"><div class="ticker-track">
-  <span class="tick-item">Local Bike Source</span><span class="tick-item">Custom Builds</span><span class="tick-item">Complete Bikes</span><span class="tick-item">Parts & Components</span><span class="tick-item">Frame Builders</span><span class="tick-item">Expert Service</span><span class="tick-item">Near You. Always.</span>
-  <span class="tick-item">Local Bike Source</span><span class="tick-item">Custom Builds</span><span class="tick-item">Complete Bikes</span><span class="tick-item">Parts & Components</span><span class="tick-item">Frame Builders</span><span class="tick-item">Expert Service</span><span class="tick-item">Near You. Always.</span>
+  <span class="tick-item">Local Bike Source</span><span class="tick-item">Custom Builds</span><span class="tick-item">Complete Bikes</span><span class="tick-item">Parts & Components</span><span class="tick-item">Frame Builders</span><span class="tick-item">Expert Service</span><span class="tick-item">Coast to Coast to Coast</span><span class="tick-item">Near You. Always.</span>
+  <span class="tick-item">Local Bike Source</span><span class="tick-item">Custom Builds</span><span class="tick-item">Complete Bikes</span><span class="tick-item">Parts & Components</span><span class="tick-item">Frame Builders</span><span class="tick-item">Expert Service</span><span class="tick-item">Coast to Coast to Coast</span><span class="tick-item">Near You. Always.</span>
 </div></div>
 
 <!-- FEATURE 1 -->
@@ -379,39 +539,39 @@ footer { background: #040404; padding: 56px 56px 32px; border-top: 1px solid rgb
   <div class="feature-body">
     <p class="flabel">Custom Builds</p>
     <h2 class="ftitle">Dream It.<br>We Source It.</h2>
-    <p class="ftext">Describe your build and we connect you directly to the best local builder in Calgary.</p>
+    <p class="ftext">Describe your build and we connect you directly to the best local builders near you.</p>
     <a class="btn" href="#">Start a Build</a>
   </div>
 </section>
 
 <!-- FEED -->
 <section class="sec sec-bg1 reveal">
-  <p class="ey">Live · Calgary, AB</p>
-  <h2 class="st">What Calgary Riders Are Doing.</h2>
+  <p class="ey">Live · Across North America</p>
+  <h2 class="st">Riders Are Sourcing. Right Now.</h2>
   <div class="feed-wrap">
     <div class="feed">
-      <div class="fi"><div class="av">MT</div><div class="ft"><b>Mike T.</b> sourced a full GRX gravel build through <b>Bow Cycle</b></div><div class="fm">2 hrs ago</div></div>
-      <div class="fi"><div class="av">SK</div><div class="ft"><b>Sarah K.</b> found a <b>2026 Trek Domane SL</b> at University Cycles</div><div class="fm">4 hrs ago</div></div>
-      <div class="fi"><div class="av">DR</div><div class="ft"><b>Dave R.</b> booked a custom titanium frame with <b>Titus Cycles</b></div><div class="fm">Yesterday</div></div>
-      <div class="fi"><div class="av">JL</div><div class="ft"><b>Jen L.</b> sourced <b>SRAM Red AXS</b> — 3 local shops had it in stock</div><div class="fm">Yesterday</div></div>
-      <div class="fi"><div class="av">CB</div><div class="ft"><b>Chris B.</b> booked a pro fit and service at <b>Ridley's Cycle</b></div><div class="fm">2 days ago</div></div>
+      <div class="fi"><div class="av">MT</div><div class="ft"><b>Mike T.</b> in <span class="locale-region">Calgary, AB</span> sourced a full GRX gravel build through <b class="locale-shop">Bow Cycle</b></div><div class="fm">2 hrs ago</div></div>
+      <div class="fi"><div class="av">AR</div><div class="ft"><b>Ana R.</b> in <span class="locale-region">Brooklyn, NY</span> found a <b>2026 Trek Domane SL</b> at a local shop</div><div class="fm">3 hrs ago</div></div>
+      <div class="fi"><div class="av">DR</div><div class="ft"><b>Dave R.</b> in <span class="locale-region">Portland, OR</span> booked a custom titanium frame with a local builder</div><div class="fm">Yesterday</div></div>
+      <div class="fi"><div class="av">JL</div><div class="ft"><b>Jen L.</b> in <span class="locale-region">Vancouver, BC</span> sourced <b>SRAM Red AXS</b> — 4 local shops had it in stock</div><div class="fm">Yesterday</div></div>
+      <div class="fi"><div class="av">CB</div><div class="ft"><b>Chris B.</b> in <span class="locale-region">Toronto, ON</span> booked a pro fit and service near home</div><div class="fm">2 days ago</div></div>
     </div>
     <div class="sidebar">
-      <div class="sg"><div class="adb">★ Featured</div><div class="sn">Bow Cycle</div><div class="sd">Calgary's largest independent bike shop. Full service, custom builds.</div><div class="sc">View Shop →</div></div>
-      <div class="ss"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div class="sn" style="font-size:14px">Ridley's Cycle</div><div class="adb sv">◈ Promoted</div></div><div class="sd">MTB specialists. Full workshop.</div><div class="sc" style="color:#8a9bb5">View Shop →</div></div>
+      <div class="sg"><div class="adb">★ Featured</div><div class="sn locale-shop">Bow Cycle</div><div class="sd"><span class="locale-city">Calgary</span>'s largest independent bike shop. Full service, custom builds.</div><div class="sc">View Shop →</div></div>
+      <div class="ss"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div class="sn locale-shop" style="font-size:14px">Ridley's Cycle</div><div class="adb sv">◈ Promoted</div></div><div class="sd">MTB specialists. Full workshop.</div><div class="sc" style="color:#8a9bb5">View Shop →</div></div>
     </div>
   </div>
 </section>
 
 <!-- BUILDERS -->
 <section class="sec sec-bg2 reveal">
-  <p class="ey">Custom Builders · Calgary, AB</p>
-  <h2 class="st">12 Builders Right Here.</h2>
+  <p class="ey">Custom Builders · Near You</p>
+  <h2 class="st"><span class="locale-count">12</span> Builders Within <span class="locale-distance">60 km</span>.</h2>
   <div class="feat-b">
     <div>
-      <div class="fb-top"><div class="fb-city">Calgary, AB</div><div class="adb">★ Featured Builder</div></div>
+      <div class="fb-top"><div class="fb-city locale-region">Calgary, AB</div><div class="adb">★ Featured Builder</div></div>
       <div class="fb-name">Bow Valley Builds</div>
-      <div class="fb-desc">Calgary's premier custom frame builder. Steel and titanium handbuilt frames spec'd to your fit, terrain, and ride.</div>
+      <div class="fb-desc">Premier custom frame builder. Steel and titanium handbuilt frames spec'd to your fit, terrain, and ride.</div>
       <div class="tags"><span class="tag">Steel</span><span class="tag">Titanium</span><span class="tag">Gravel</span><span class="tag">Road</span></div>
     </div>
     <div class="fb-r">
@@ -420,21 +580,21 @@ footer { background: #040404; padding: 56px 56px 32px; border-top: 1px solid rgb
     </div>
   </div>
   <div class="bgrid">
-    <div class="bc"><div class="bc-city">Calgary, AB</div><div class="bc-name">Rocky Custom Cycles</div><div class="bc-desc">Full custom builds, any spec. 10-week lead time.</div><div class="tags"><span class="tag">Carbon</span><span class="tag">MTB</span></div><div class="bc-cta">View Builder →</div></div>
-    <div class="bc prom"><div style="display:flex;justify-content:space-between"><div class="bc-city">Calgary, AB</div><div class="adb sv">◈ Promoted</div></div><div class="bc-name">Foothills Framebuilding</div><div class="bc-desc">Handmade lugged steel. 16-week lead time.</div><div class="tags"><span class="tag">Steel</span><span class="tag">Road</span></div><div class="bc-cta">View Builder →</div></div>
-    <div class="bc"><div class="bc-city">Calgary, AB</div><div class="bc-name">Summit Cycles Co.</div><div class="bc-desc">Bikepacking and adventure builds.</div><div class="tags"><span class="tag">Steel</span><span class="tag">Bikepacking</span></div><div class="bc-cta">View Builder →</div></div>
+    <div class="bc"><div class="bc-city locale-region">Calgary, AB</div><div class="bc-name">Rocky Custom Cycles</div><div class="bc-desc">Full custom builds, any spec. 10-week lead time.</div><div class="tags"><span class="tag">Carbon</span><span class="tag">MTB</span></div><div class="bc-cta">View Builder →</div></div>
+    <div class="bc prom"><div style="display:flex;justify-content:space-between"><div class="bc-city locale-region">Calgary, AB</div><div class="adb sv">◈ Promoted</div></div><div class="bc-name">Foothills Framebuilding</div><div class="bc-desc">Handmade lugged steel. 16-week lead time.</div><div class="tags"><span class="tag">Steel</span><span class="tag">Road</span></div><div class="bc-cta">View Builder →</div></div>
+    <div class="bc"><div class="bc-city locale-region">Calgary, AB</div><div class="bc-name">Summit Cycles Co.</div><div class="bc-desc">Bikepacking and adventure builds.</div><div class="tags"><span class="tag">Steel</span><span class="tag">Bikepacking</span></div><div class="bc-cta">View Builder →</div></div>
   </div>
 </section>
 
 <!-- POPULAR -->
 <section class="sec sec-bg3 reveal">
-  <p class="ey">Most Sourced · Calgary · This Month</p>
-  <h2 class="st">What Calgary Riders Are Buying.</h2>
+  <p class="ey">Most Sourced · North America · This Month</p>
+  <h2 class="st">What Riders Are Buying.</h2>
   <div class="pgrid">
-    <div class="pc g"><span class="pbadge g">★ Sponsored</span><div class="pr">01</div><div class="pcat">Gravel</div><div class="pname">Trek Checkpoint SL 6</div><div class="pshop">In stock · Bow Cycle</div><div class="pbar"><div class="pfill" style="width:92%"></div></div></div>
-    <div class="pc"><div class="pr">02</div><div class="pcat">Custom Build</div><div class="pname">GRX Di2 Gravel Build</div><div class="pshop">8 local builds this month</div><div class="pbar"><div class="pfill" style="width:74%"></div></div></div>
-    <div class="pc sv"><span class="pbadge sv">◈ Promoted</span><div class="pr">03</div><div class="pcat">Road</div><div class="pname">Specialized Tarmac SL7</div><div class="pshop">In stock · University Cycles</div><div class="pbar"><div class="pfill" style="width:61%"></div></div></div>
-    <div class="pc"><div class="pr">04</div><div class="pcat">Mountain</div><div class="pname">Santa Cruz Hightower</div><div class="pshop">3 shops near you</div><div class="pbar"><div class="pfill" style="width:52%"></div></div></div>
+    <div class="pc g"><span class="pbadge g">★ Sponsored</span><div class="pr">01</div><div class="pcat">Gravel</div><div class="pname">Trek Checkpoint SL 6</div><div class="pshop">In stock · <span class="locale-shop">Bow Cycle</span> + 18 more</div><div class="pbar"><div class="pfill" style="width:92%"></div></div></div>
+    <div class="pc"><div class="pr">02</div><div class="pcat">Custom Build</div><div class="pname">GRX Di2 Gravel Build</div><div class="pshop">142 builds across NA this month</div><div class="pbar"><div class="pfill" style="width:74%"></div></div></div>
+    <div class="pc sv"><span class="pbadge sv">◈ Promoted</span><div class="pr">03</div><div class="pcat">Road</div><div class="pname">Specialized Tarmac SL7</div><div class="pshop">In stock · <span class="locale-shop">University Cycles</span> + 24 more</div><div class="pbar"><div class="pfill" style="width:61%"></div></div></div>
+    <div class="pc"><div class="pr">04</div><div class="pcat">Mountain</div><div class="pname">Santa Cruz Hightower</div><div class="pshop">In 31 shops near riders like you</div><div class="pbar"><div class="pfill" style="width:52%"></div></div></div>
   </div>
 </section>
 
@@ -443,30 +603,81 @@ footer { background: #040404; padding: 56px 56px 32px; border-top: 1px solid rgb
   <p class="ey">Riders Love It</p>
   <h2 class="st">What They're Saying.</h2>
   <div class="tgrid">
-    <div class="tc"><p class="tq">Found my perfect gravel shop in 30 seconds. Booked a fitting the same day.</p><div class="ta"><p class="tn">Mike T.</p><p class="tl">Calgary, AB</p></div></div>
-    <div class="tc"><p class="tq">Moved to Vancouver and had a great shop recommendation before my boxes were unpacked.</p><div class="ta"><p class="tn">Sarah K.</p><p class="tl">Vancouver, BC</p></div></div>
-    <div class="tc"><p class="tq">Best way to find a shop when visiting a new city on a cycling trip.</p><div class="ta"><p class="tn">Dave R.</p><p class="tl">Toronto, ON</p></div></div>
+    <div class="tc"><p class="tq">Found my perfect gravel shop in 30 seconds. Booked a fitting the same day.</p><div class="ta"><p class="tn">Mike T.</p><p class="tl locale-region">Calgary, AB</p></div></div>
+    <div class="tc"><p class="tq">Moved to Portland and had a great shop recommendation before my boxes were unpacked.</p><div class="ta"><p class="tn">Sarah K.</p><p class="tl locale-region">Portland, OR</p></div></div>
+    <div class="tc"><p class="tq">Best way to find a shop when visiting a new city on a cycling trip.</p><div class="ta"><p class="tn">Dave R.</p><p class="tl locale-region">Toronto, ON</p></div></div>
   </div>
 </section>
 
-<!-- PROVINCES -->
+<!-- REACH -->
 <section class="prov-sec reveal">
   <div>
-    <p class="ey">Beyond Calgary</p>
-    <h2 class="st">Every Province.<br>Every City.</h2>
-    <p>Travelling or moving? Browse builders, shops, and bikes anywhere in Canada.</p>
-    <a class="btn" style="margin-top:24px;display:inline-block" href="#">Browse All Provinces</a>
+    <p class="ey">Coast to Coast to Coast</p>
+    <h2 class="st">Source Local.<br>Anywhere.</h2>
+    <p>Built in <span class="locale-city">Calgary</span> — the fastest-growing cycling market in North America. Live across Canada and the United States. Wherever you ride, your local bike scene is here.</p>
+    <a class="btn" style="margin-top:24px;display:inline-block" href="#">Browse All Regions</a>
   </div>
-  <div class="provgrid">
-    <div class="provcard"><div class="provname">Alberta</div><div class="provcount">42 shops · 12 builders</div></div>
-    <div class="provcard"><div class="provname">BC</div><div class="provcount">68 shops · 24 builders</div></div>
-    <div class="provcard"><div class="provname">Ontario</div><div class="provcount">94 shops · 31 builders</div></div>
-    <div class="provcard"><div class="provname">Quebec</div><div class="provcount">71 shops · 18 builders</div></div>
-    <div class="provcard"><div class="provname">Manitoba</div><div class="provcount">22 shops · 6 builders</div></div>
-    <div class="provcard"><div class="provname">Saskatchewan</div><div class="provcount">14 shops · 3 builders</div></div>
-    <div class="provcard"><div class="provname">Nova Scotia</div><div class="provcount">16 shops · 4 builders</div></div>
-    <div class="provcard"><div class="provname">New Brunswick</div><div class="provcount">11 shops · 2 builders</div></div>
-    <div class="provcard"><div class="provname">→ US</div><div class="provcount">Coming soon</div></div>
+  <div>
+    <div class="prov-primary">
+      <div class="provcard-lg"><div class="provname">🇨🇦 Canada</div><div class="provcount">All 10 provinces · Live</div></div>
+      <div class="provcard-lg"><div class="provname">🇺🇸 United States</div><div class="provcount">All 50 states · Rolling out</div></div>
+    </div>
+    <p class="prov-global-label">Global · Coming soon</p>
+    <div class="provgrid">
+      <div class="provcard provcard-sm"><div class="provname">Mexico</div><div class="provcount">Coming soon</div></div>
+      <div class="provcard provcard-sm"><div class="provname">United Kingdom</div><div class="provcount">Coming soon</div></div>
+      <div class="provcard provcard-sm"><div class="provname">Europe</div><div class="provcount">Coming soon</div></div>
+      <div class="provcard provcard-sm"><div class="provname">Australia / NZ</div><div class="provcount">Coming soon</div></div>
+      <div class="provcard provcard-sm"><div class="provname">Asia-Pacific</div><div class="provcount">Coming soon</div></div>
+      <div class="provcard provcard-sm"><div class="provname">Rest of World</div><div class="provcount">Request a region</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-sec reveal">
+  <div class="contact-wrap">
+    <div class="contact-left">
+      <p class="ey">Get In Touch</p>
+      <h2 class="st">Tell Us What<br>You Want To Ride.</h2>
+      <p class="contact-lead">We're in pre-launch and listening hard. Whether you're a rider, a shop owner, a builder, or a brand — your input shapes what LBS becomes.</p>
+      <div class="contact-meta">
+        <div>Email · <a href="mailto:hello@lbs.bike">hello@lbs.bike</a></div>
+        <div>Calgary, AB · Canada</div>
+      </div>
+    </div>
+    <div>
+      <form class="contact-form" id="contact-form" onsubmit="return submitContact(event)">
+        <div class="field">
+          <label for="cf-name">Your Name</label>
+          <input id="cf-name" name="name" type="text" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="cf-email">Email</label>
+          <input id="cf-email" name="email" type="email" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="cf-role">I Am A…</label>
+          <select id="cf-role" name="role">
+            <option>Rider looking for a bike or shop</option>
+            <option>Bike shop owner</option>
+            <option>Custom builder</option>
+            <option>Brand or distributor</option>
+            <option>Investor or partner</option>
+            <option>Press / media</option>
+            <option>Just curious</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="cf-msg">Message</label>
+          <textarea id="cf-msg" name="message" required placeholder="What would you like to see in LBS? What problem are you hoping it solves?"></textarea>
+        </div>
+        <button type="submit">Send Message</button>
+        <div class="contact-success" id="contact-success">
+          Thanks — we got your message and will be in touch soon.
+        </div>
+      </form>
+    </div>
   </div>
 </section>
 
@@ -474,23 +685,44 @@ footer { background: #040404; padding: 56px 56px 32px; border-top: 1px solid rgb
 <footer>
   <div class="fgrid">
     <div>
-      <canvas id="footer-canvas"></canvas>
+      <canvas id="footer-canvas" aria-label="LBS.BIKE logo" role="img"></canvas>
       <p class="ftag">LBS — Local Bike Source. Everything bike, sourced locally. Builders, shops, parts, and service near you.</p>
-      <div class="fcon">hello@lbs.bike</div>
+      <div class="fcon"><a href="mailto:hello@lbs.bike">hello@lbs.bike</a></div>
     </div>
     <div><p class="fct">Source</p><ul class="flinks"><li><a href="#">Source a Bike</a></li><li><a href="#">Custom Build</a></li><li><a href="#">Find Parts</a></li><li><a href="#">Book Service</a></li></ul></div>
-    <div><p class="fct">Discover</p><ul class="flinks"><li><a href="#">Builders Near Me</a></li><li><a href="#">Shops Near Me</a></li><li><a href="#">Trending</a></li><li><a href="#">Provinces</a></li></ul></div>
+    <div><p class="fct">Discover</p><ul class="flinks"><li><a href="#">Builders Near Me</a></li><li><a href="#">Shops Near Me</a></li><li><a href="#">Trending</a></li><li><a href="#">Regions</a></li></ul></div>
     <div><p class="fct">Advertise</p><ul class="flinks"><li><a href="#">★ Gold Placement</a></li><li><a href="#">◈ Silver Placement</a></li><li><a href="#">Free Listing</a></li><li><a href="#">Media Kit</a></li></ul></div>
   </div>
   <div class="fbot">
-    <p class="fcopy">© 2026 LBS.Bike — Local Bike Source</p>
+    <p class="fcopy">© 2026 LBS.BIKE, DBA <a href="https://www.wrightinc.com" target="_blank" rel="noopener">www.wrightinc.com</a> — Local Bike Source</p>
     <p class="fcopy">All rights reserved</p>
   </div>
 </footer>
 
 <script>
-function openMenu()  { document.getElementById('burger').classList.add('open'); document.getElementById('drawer').classList.add('open'); document.getElementById('overlay').classList.add('open'); }
-function closeMenu() { document.getElementById('burger').classList.remove('open'); document.getElementById('drawer').classList.remove('open'); document.getElementById('overlay').classList.remove('open'); }
+function openMenu()  {
+  document.getElementById('burger').classList.add('open');
+  document.getElementById('burger').setAttribute('aria-expanded','true');
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawer').setAttribute('aria-hidden','false');
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('overlay').setAttribute('aria-hidden','false');
+}
+function closeMenu() {
+  document.getElementById('burger').classList.remove('open');
+  document.getElementById('burger').setAttribute('aria-expanded','false');
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawer').setAttribute('aria-hidden','true');
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('overlay').setAttribute('aria-hidden','true');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+/* Prevent placeholder href="#" links from jumping to top of page. */
+document.addEventListener('click', e => {
+  const a = e.target.closest('a');
+  if (a && a.getAttribute('href') === '#') { e.preventDefault(); }
+});
 
 function drawWheel(canvas, size, spin) {
   const dpr = window.devicePixelRatio || 1;
@@ -533,7 +765,19 @@ function drawWheel(canvas, size, spin) {
     ctx.fillText('LBS.',cx,sy);
     ctx.fillText('BIKE',cx,sy+lh+gap);
   }
-  if(spin){let a=0;(function loop(){a-=.004;draw(a);requestAnimationFrame(loop);})();}
+  if(spin){
+    let a=0, rafId=null, running=true;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) { draw(0); return; }
+    function loop(){ if(!running) return; a-=.004; draw(a); rafId=requestAnimationFrame(loop); }
+    loop();
+    // Pause when the wheel scrolls offscreen to save battery
+    const visObs = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting && !running) { running = true; loop(); }
+      else if (!e.isIntersecting) { running = false; if(rafId) cancelAnimationFrame(rafId); }
+    }), { threshold: 0 });
+    visObs.observe(canvas);
+  }
   else draw(0);
 }
 
@@ -547,6 +791,39 @@ const obs=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}
 }),{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* Contact form — opens the visitor's mail client with a pre-filled message.
+   Replace with a Formspree / Netlify Forms / your backend endpoint when ready. */
+function submitContact(e) {
+  e.preventDefault();
+  const name  = document.getElementById('cf-name').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const role  = document.getElementById('cf-role').value;
+  const msg   = document.getElementById('cf-msg').value.trim();
+  const subject = `LBS.BIKE input from ${name}`;
+  const body = `Name: ${name}\nEmail: ${email}\nRole: ${role}\n\nMessage:\n${msg}`;
+  window.location.href = `mailto:hello@lbs.bike?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  document.getElementById('contact-success').classList.add('show');
+  return false;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   LOCALIZATION HOOK — wire up when geo-detection is ready.
+   All city/region/shop references are wrapped in classed spans:
+     .locale-city      e.g. "Calgary"
+     .locale-region    e.g. "Calgary, AB"
+     .locale-shop      e.g. "Bow Cycle"
+     .locale-count     e.g. "12" (builders count)
+     .locale-distance  e.g. "60 km" (radius)
+   Toggle body.demo-active in DevTools to outline every locale span.
+
+   Example wiring (uncomment + adapt):
+   // fetch('/api/geo').then(r=>r.json()).then(geo => {
+   //   document.querySelectorAll('.locale-city').forEach(el => el.textContent = geo.city);
+   //   document.querySelectorAll('.locale-region').forEach(el => el.textContent = `${geo.city}, ${geo.region}`);
+   //   // .locale-shop / .locale-count / .locale-distance: pull from per-city dataset
+   // });
+   ───────────────────────────────────────────────────────────── */
 </script>
 </body>
 </html>
